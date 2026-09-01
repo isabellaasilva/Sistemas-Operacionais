@@ -1,0 +1,319 @@
+Lista Linux
+Isabella Maria - ADS 1
+
+1) #!/bin/bash 
+clear 
+read -p "Informe n1: " n1
+read -p "Informe n2: " n2 
+echo "1)Soma"
+echo "2)Subtração" 
+echo "3)Multiplicação" 
+echo "4)Divisão" 
+echo "5)Outro" 
+read -p "Digite a operação escolhida: " x 
+case $x in 
+1) echo "Soma" 
+soma=$(expr $n1 + $n2) 
+echo "O Resultado da soma é '$soma'" 
+;; 
+2)echo "Subtração" 
+soma=$(expr $n1 - $n2) 
+echo "O Resultado da subtração é '$soma'"
+;;
+3)echo "Multiplicação" 
+soma=$(expr $n1 \* $n2) 
+echo "O Resultado da multiplicação é '$soma'" 
+;;
+4)echo "Divisão" 
+soma=$(expr $n1 / $n2) 
+echo "O Resultado da divisão é '$soma'" 
+;; 
+*)echo "Outro" 
+esac 
+
+2) #!/bin/bash 
+clear
+read -p "Digite o nome do arquivo: " n1 
+rm $n1 
+
+3) #!/bin/bash 
+clear 
+read -p "Digite o nome do arquivo para renomear: " n1 
+read -p "Informe o novo nome do arquivo: " n2 
+mv $n1 $n2 
+
+4) #!/bin/bash 
+clear 
+read -p "Digite o nome do arquivo para renomear: " n1 
+read -p "Informe a pasta destino do arquivo: " n2 
+mv $n1 $n2 
+
+5) #!/bin/bash 
+clear
+read -p "Informe o nome exato do arquivo: " n1 
+rm $n1
+
+6) #!/bin/bash 
+clear
+read -p "Informe a palavra que quer encontrar: " n1 
+read -p "Informe o nome do arquivo em qual buscar: " n2 
+grep $n1 $n2 
+
+7) #!/bin/bash 
+clear
+echo "Digite o número da função para prosseguir." 
+echo "1)Encontrar um arquivo dentro do diretório" 
+echo "2)Encontrar a origem de um comando dentro do computador.  " 
+echo "3)Encontrar um arquivo especifico no computador." 
+echo "4)Cancela ação" 
+read -p "Informe a operação: " x 
+case $x in 
+1) read -p "Informe o nome da pasta: " p1 
+cd .. 
+cd .. 
+find $p1 ;; 
+2) read -p "Informe o nome do Comando: " c1 
+whereis $c1 ;; 
+3) read -p "Informe o nome do arquivo: " a1 
+locate $a1 ;; 
+*) echo "Ação cancelada." 
+esac 
+
+8) #!/bin/bash 
+read -p "Escolha o nome do novo arquivo: " a1 
+read -p "Escolha o arquivo a ser copiado primeiro: " a2 
+read -p "Escolha o arquivo a ser copiado segundo: " a3 
+#~ cat $a2 $a3 > $a1 
+cat $a2 $a3 >> $a1 
+
+9) #!/bin/bash 
+clear 
+read -p "Escolha o arquivo a ser comparado: " a2 
+read -p "Escolha o arquivo a ser comparado: " a3   
+diff -qs $a2 $a3 
+diff -s $a2 $a3
+
+10) #!/bin/bash 
+clear 
+echo "Digite o nome do usuário:"
+read usuario
+linha=$(grep "^$usuario:" /etc/passwd)
+if [ -z "$linha" ]; then
+    echo "Usuário não encontrado."
+else
+    home=$(echo "$linha" | cut -d: -f6)
+    echo "Nome do usuário: $usuario"
+    echo "Diretório de trabalho (home): $home"
+    if [ -d "$home" ]; then
+        espaco=$(du -sh "$home" 2>/dev/null | cut -f1)
+        echo "Espaço utilizado no disco: $espaco"
+    else
+        echo "Não foi possível acessar o diretório $home (pode não existir ou faltar permissão)."
+    fi
+fi
+
+11) #!/bin/bash 
+echo "Digite o número da função para prosseguir." 
+echo "1)Ver usuarios online no momento" 
+echo "2)Informações detalhadas.  " 
+echo "3)Cancelar acao" 
+read -p "Informe qual operação você quer fazer: " x 
+case $x in 
+1) whoami 
+echo "Este usuário esta online"	 ;; 
+2) who -a 
+echo "Todas as informações de usuário.";; 
+*) echo "Ação cancelada." 
+esac
+
+12) #!/bin/bash
+read -p "Escolha o arquivo cujas permissões deseja mudar: " a1   
+echo "Digite o numero da função para prosseguir." 
+echo "1)Permissão 644" 
+echo "2)Permissão 755" 
+echo "3)Permissão 700" 
+echo "4)Permissão customizada." 
+echo "5)Cancelar ação." 
+read -p "Informe qual operação você quer fazer: " x 
+case $x in 
+
+1) chmod 644 $a1 
+echo "Sucesso"	 
+;; 
+2) chmod 755 $a1 
+echo "Sucesso"	 
+;; 
+3) chmod 700 $a1 
+echo "Sucesso"	 
+;; 
+4) read -p "Escolha as permissões que você deseja dar ao arquivo: " p1 
+chmod $p1 $a1 
+echo "Sucesso"	
+;; 
+*) echo "Ação cancelada." 
+esac 
+
+13) #!/bin/bash 
+clear 
+echo "Um snapshot de todos os processos atuais, por ordem de prioridade."
+ps aux
+
+14)  #!/bin/bash 
+clear 
+read -p "Qual processo atual você quer encontrar: " x 
+ps aux | grep $x  
+
+15) #!/bin/bash 
+clear 
+read -p "Informe o PID do processo que você quer encerrar: " a1 
+echo "Digite o numero da função para prosseguir." 
+echo "1)Prosseguir com encerramento." 
+echo "2)Cancelar encerramento." 
+read -p "Informe a operação: " x 
+case $x in
+1) kill $a1 
+echo "Sucesso"	 ;; 
+*) echo "Ação cancelada." 
+esac
+
+16) #!/bin/bash 
+clear 
+echo "Informações do Kernel" 
+echo "----------------------" 
+uname -a
+
+17) #!/bin/bash 
+clear 
+read -p "Informe o nome do arquivo para ver informações sobre:" a1 
+echo "Nome do arquivo: $a1" 
+echo -n "Bytes: "; wc  -c < "$a1" 
+echo -n "Linhas: "; wc --lines < "$a1" 
+echo -n "Palavras: "; wc --words < "$a1" 
+
+18) #!/bin/bash 
+clear 
+echo "Data Atual" 
+echo "---------------------- "
+date 
+echo " ----------------------" 
+echo "Informações do Kernel" 
+echo "----------------------"
+uname -a 
+echo "----------------------" 
+echo "Calendário" 
+echo "----------------------" 
+cal 
+echo " ----------------------" 
+echo "Tempo de funcionamento do Sistema" 
+echo "----------------------" 
+uptime 
+
+19) #!/bin/bash 
+clear 
+echo "1)Data Atual" 
+echo "2)Versão de Kernel" 
+echo "3)Calendário" 
+echo "4)Tempo de funcionamento" 
+echo "5)Usuários Conectados" 
+echo "6)Processos em execução" 
+echo "7)Sair" 
+read -p "Informe a operação: " x 
+case $x in 
+
+1) echo "Data Atual" 
+echo "----------------------" 
+date 
+;; 
+2) echo "Informações do Kernel" 
+echo "---------------------- "
+uname -a 
+;; 
+3)echo "Calendário" 
+echo "----------------------" 
+cal 
+;; 
+4) echo "Tempo de funcionamento do Sistema" 
+echo "----------------------" 
+uptime 
+;; 
+5) echo "Todas as informações de usuario" 
+echo "----------------------" 
+who -a 
+;; 
+6) echo "Processos em execução" 
+echo "----------------------" 
+ps aux
+;;	 
+*) echo "Ação cancelada" 
+esac 
+
+20) #!/bin/bash 
+clear   
+echo "1)Procurar arquivo" 
+echo "2)Procurar palavra em arquivo" 
+echo "3)Renomear Arquivo" 
+echo "4)Mover Arquivo" 
+echo "5)Remover Arquivo" 
+echo "6)Comparar Arquivos" 
+echo "7)Sair" 
+read -p "Informe a operação: " x 
+case $x in 
+1) read -p "Qual o nome do arquivo que deseja encontrar: " n1 
+echo "----------------------"
+locate $n1
+;;
+2) read -p "Qual o nome do arquivo em que deseja encontrar: " n1 
+read -p "Qual palavra você deseja encontrar: " p1 
+echo "----------------------" 
+grep $p1 $n1
+;;
+ 3) read -p "Informe o nome exato do arquivo a ser renomeado: " n1 
+read -p "Informe ao novo nome do arquivo: " n2 
+echo "----------------------" 
+mv $n1 $n2 
+echo "Sucesso" 
+;;
+4) read -p "Informe o nome exato do arquivo a ser movido: " n1 
+read -p "Informe a pasta destino do arquivo: " n2 
+echo "----------------------" 
+mv $n1 $n2 
+echo "Sucesso" 
+;; 
+5) read -p "Informe o nome exato do arquivo a ser removido: " n1 
+echo "----------------------" 
+rm $n1 
+echo "Sucesso" 
+;; 
+6) read -p "Informe o nome exato do arquivo a ser comparado: " n1 
+read -p "Informe o nome do arquivo a ser comparado: " n2 
+echo "----------------------" 
+diff -qs $a2 $a3 
+diff -s $a2 $a3  
+echo "Sucesso" 
+;;	 
+*) echo "Ação cancelada" 
+esac
+ 
+21) #!/bin/bash 
+clear 
+echo "1)Processos atuais" 
+echo "2)Procurar processos" 
+echo "3)Encerrar Processo" 
+echo "4)Sair" 
+read -p "Informe a operação: " x
+case $x in 
+1) echo "Processos atuais." 
+echo "----------------------" 
+ps aux 
+;; 
+2) read -p "Digite o nome do processo: " n1 
+echo "----------------------" 
+ps aux | grep $n1 
+;; 
+3)	 read -p "Informe o PID do processo que deseja encerrar: " a1 
+echo "----------------------" 
+kill $a1 
+echo "Sucesso" 
+;;
+*) echo "Ação cancelada" 
+esac
